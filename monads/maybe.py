@@ -24,6 +24,18 @@ class Maybe:
         else:
             return _maybe.value
 
+    @staticmethod
+    def list_to_maybe(_list):
+        return Nothing() if len(_list) == 0 else Just(_list[0])
+
+    @staticmethod
+    def maybe_to_list(_maybe):
+        return [] if Maybe.is_nothing(_maybe) else [_maybe.value]
+
+    @staticmethod
+    def cat_maybes(_maybes):
+        return list(filter(lambda m : Maybe.is_just(m), _maybes))
+
 class Nothing(Maybe):
     def __init__(self):
         pass
